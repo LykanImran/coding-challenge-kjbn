@@ -23,6 +23,10 @@ class OddProvider with ChangeNotifier {
   MessageStatus _msgStatus = MessageStatus.Unintialized;
   MessageStatus get msgStatus => _msgStatus;
 
+  void setHomeDate(HomeModel homeValue) {
+    _home = homeValue;
+  }
+
 //// Timer
   int _remainingTime = 5;
   Timer? _timer;
@@ -42,6 +46,7 @@ class OddProvider with ChangeNotifier {
         _resetTimer();
         _msgStatus = MessageStatus.TimeOut;
         attempts++;
+        _home.attempts = attempts;
 
         getMessage();
         notifyListeners();
@@ -68,6 +73,7 @@ class OddProvider with ChangeNotifier {
     _home.second = now.second;
     _home.randomNum = Random().nextInt(60);
     attempts++;
+    _home.attempts = attempts;
     checkMatching();
     //getMessage();
     if (_timer == null) {
@@ -91,13 +97,16 @@ class OddProvider with ChangeNotifier {
     if (_remainingTime > 0) {
       if (_home.second == home.randomNum) {
         _msgStatus = MessageStatus.Matched;
+
         success++;
+        _home.success = success;
       } else {
         _msgStatus = MessageStatus.NotMatched;
       }
     } else {
       _msgStatus = MessageStatus.TimeOut;
       attempts++;
+      _home.attempts = attempts;
     }
     getMessage();
     notifyListeners();

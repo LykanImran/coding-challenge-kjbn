@@ -1,6 +1,8 @@
 import 'package:circular_chart_flutter/circular_chart_flutter.dart';
 import 'package:coding_challenge_kjbn/common/percentage_chart.dart';
 import 'package:coding_challenge_kjbn/common/primary_button.dart';
+import 'package:coding_challenge_kjbn/feature/home_page/model/home_model.dart';
+import 'package:coding_challenge_kjbn/feature/home_page/repository/home_repository.dart';
 import 'package:coding_challenge_kjbn/feature/home_page/widgets/dash_card.dart';
 import 'package:coding_challenge_kjbn/feature/home_page/widgets/message_display.dart';
 import 'package:coding_challenge_kjbn/feature/home_page/widgets/timer_widget.dart';
@@ -11,8 +13,40 @@ import 'package:coding_challenge_kjbn/utils/style_guide.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+
+    /// load Data here
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.inactive) {
+      // Save data when the app is going into the background
+      HomeRepository.saveData(Provider.of<OddProvider>(context).home);
+    } else if (state == AppLifecycleState.resumed) {
+      // Load data when the app is coming to the foreground
+      HomeModel home = await HomeRepository.loadData();
+      Provider.of<OddProvider>(context).setHomeDate(home);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

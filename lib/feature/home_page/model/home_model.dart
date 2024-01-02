@@ -5,5 +5,8 @@ class HomeModel {
   String? msgSub;
   int currTimer;
 
-  HomeModel({this.currTimer = 5});
+  int? attempts;
+  int? success;
+
+  HomeModel({this.currTimer = 5, this.attempts = 0, this.success = 0});
 }
