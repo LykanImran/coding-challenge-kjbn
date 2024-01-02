@@ -6,6 +6,7 @@ import 'package:coding_challenge_kjbn/feature/home_page/widgets/message_display.
 import 'package:coding_challenge_kjbn/feature/home_page/widgets/timer_widget.dart';
 import 'package:coding_challenge_kjbn/feature/home_page/widgets/titled_card.dart';
 import 'package:coding_challenge_kjbn/providers/odd_provider.dart';
+import 'package:coding_challenge_kjbn/utils/delayed_animation.dart';
 import 'package:coding_challenge_kjbn/utils/style_guide.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,47 +26,56 @@ class HomePage extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 15),
         child: Column(
           children: [
-            Row(
-              children: [
-                DashCard(
-                  title:
-                      '${Provider.of<OddProvider>(context).home.second ?? 0}',
-                  sub: 'Current Second',
-                ),
-                DashCard(
-                  title:
-                      '${Provider.of<OddProvider>(context).home.randomNum ?? 0}',
-                  sub: 'Random Number',
-                ),
-              ],
+            DelayedAnimation(
+                delay: 4,
+                child: Row(
+                  children: [
+                    DashCard(
+                      title:
+                          '${Provider.of<OddProvider>(context).home.second ?? 0}',
+                      sub: 'Current Second',
+                    ),
+                    DashCard(
+                      title:
+                          '${Provider.of<OddProvider>(context).home.randomNum ?? 0}',
+                      sub: 'Random Number',
+                    ),
+                  ],
+                )),
+            DelayedAnimation(
+              delay: 3,
+              child: MessageDisplay(),
             ),
-            MessageDisplay(),
-            TitledCard(
-              title: 'Timer',
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                child: Consumer<OddProvider>(
-                  builder: (context, oddProv, child) {
-                    int sec = oddProv.home.currTimer;
-                    debugPrint("Timer Rebuild ----------> ${sec}");
-                    return TimerWidget(
-                      value: sec, // 40% filled
-                    );
-                  },
-                ),
-              ),
-            ),
+            DelayedAnimation(
+                delay: 2,
+                child: TitledCard(
+                  title: 'Timer',
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    child: Consumer<OddProvider>(
+                      builder: (context, oddProv, child) {
+                        int sec = oddProv.home.currTimer;
+                        debugPrint("Timer Rebuild ----------> ${sec}");
+                        return TimerWidget(
+                          value: sec, // 40% filled
+                        );
+                      },
+                    ),
+                  ),
+                )),
             const SizedBox(
               height: 25,
             ),
-            PrimaryButton(
-              title: '    Click Me    ',
-              onPressed: () {
-                Provider.of<OddProvider>(context, listen: false)
-                    .onButtonPressed();
-              },
-              color: primaryColor,
-            )
+            DelayedAnimation(
+                delay: 1,
+                child: PrimaryButton(
+                  title: '    Click Me    ',
+                  onPressed: () {
+                    Provider.of<OddProvider>(context, listen: false)
+                        .onButtonPressed();
+                  },
+                  color: primaryColor,
+                ))
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:coding_challenge_kjbn/utils/style_guide.dart';
 import 'package:flutter/material.dart';
 
 class TimerWidget extends StatelessWidget {
@@ -33,11 +34,7 @@ class TimerWidget extends StatelessWidget {
           ),
           Text(
             "0.0${value}",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
-              color: fillColor,
-            ),
+            style: display1,
           ),
         ],
       ),
