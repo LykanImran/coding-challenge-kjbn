@@ -4,7 +4,7 @@ A Flutter app to determine if the seconds count after a button is pressed matche
 
 ## Getting Started
 
-(Here you can include instructions on how to set up and run your project, prerequisites, installation steps, etc.)
+Just press Click me continue pressing untill you get a success message
 
 ### Screenshots
 
@@ -17,5 +17,5 @@ A Flutter app to determine if the seconds count after a button is pressed matche
 - **Portfolio Website:** [lykanimran.github.io](https://lykanimran.github.io/)
 - **LinkedIn:** [Imran Hsnx](https://www.linkedin.com/in/imran-hsnx/)
 - **GitHub:** [LykanImran](https://github.com/LykanImran)
-- **Twitter:** [Twitter Profile](https://twitter.com/home)
+- **Twitter:** [imranhussainx](https://twitter.com/imranhussainx)
 
