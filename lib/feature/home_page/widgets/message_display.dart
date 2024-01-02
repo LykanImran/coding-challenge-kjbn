@@ -5,25 +5,25 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MessageDisplay extends StatelessWidget {
-  OddProvider? oddProv;
-  HomeModel? home;
-
   @override
   Widget build(BuildContext context) {
-    oddProv = Provider.of<OddProvider>(context);
-    home = oddProv!.home;
-
-    return oddProv!.msgStatus == MessageStatus.Unintialized
-        ? MessageCard(
-            title: "Let's Start",
-            sub: "Click on the Button to Start",
-            color: oddProv!.msgBgColor,
-          )
-        : MessageCard(
-            title: "${home!.msgTitle}",
-            sub: "${home!.msgSub}",
-            color: oddProv!.msgBgColor,
-          );
+    return Consumer<OddProvider>(
+      builder: (context, oddProv, child) {
+        int sec = oddProv.home.currTimer;
+        debugPrint("Timer Rebuild ----------> ${sec}");
+        return oddProv.msgStatus == MessageStatus.Unintialized
+            ? MessageCard(
+                title: "Let's Start 🎬",
+                sub: "Click on the Button to Start",
+                color: oddProv.msgBgColor,
+              )
+            : MessageCard(
+                title: "${oddProv.home!.msgTitle}",
+                sub: "${oddProv.home!.msgSub}",
+                color: oddProv.msgBgColor,
+              );
+      },
+    );
   }
 }
 

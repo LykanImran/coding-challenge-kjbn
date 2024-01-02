@@ -27,22 +27,28 @@ class OddProvider with ChangeNotifier {
   int _remainingTime = 5;
   Timer? _timer;
 
-  int get remainingTime => _remainingTime;
+  //int get remainingTime => _remainingTime;
 
   void startTimer() {
     debugPrint("Timer : Starting Timer");
 
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      debugPrint("Current Time ::  $remainingTime");
+      debugPrint("Current Time ::  ${_home.currTimer}");
       if (_remainingTime > 0) {
         _remainingTime--;
         _home.currTimer = _remainingTime;
       } else {
+        debugPrint("Timer --- Out ");
         _resetTimer();
+        _msgStatus = MessageStatus.TimeOut;
+        attempts++;
+
+        getMessage();
+        notifyListeners();
         startTimer();
       }
+      notifyListeners();
     });
-    notifyListeners();
   }
 
   void _resetTimer() {
@@ -91,6 +97,7 @@ class OddProvider with ChangeNotifier {
       }
     } else {
       _msgStatus = MessageStatus.TimeOut;
+      attempts++;
     }
     getMessage();
     notifyListeners();
@@ -100,7 +107,7 @@ class OddProvider with ChangeNotifier {
   Color msgBgColor = Colors.green;
   void getMessage() {
     if (_msgStatus == MessageStatus.Unintialized) {
-      _home.msgTitle = "Let's Start";
+      _home.msgTitle = "Let's Start 🎬";
       _home.msgSub = "Click on the Button to Start";
       msgBgColor = primaryColor;
     } else if (_msgStatus == MessageStatus.Matched) {
@@ -108,11 +115,11 @@ class OddProvider with ChangeNotifier {
       _home.msgSub = "Score : ${success}/${attempts}";
       msgBgColor = Colors.green;
     } else if (_msgStatus == MessageStatus.NotMatched) {
-      _home.msgTitle = "Sorry Try Again";
+      _home.msgTitle = "Sorry Try Again 😔";
       _home.msgSub = "Attempts : ${attempts}";
       msgBgColor = Colors.orange;
     } else if (_msgStatus == MessageStatus.TimeOut) {
-      _home.msgTitle = "Sorry! Timeout";
+      _home.msgTitle = "Sorry! Timeout ⏲️";
       _home.msgSub = "Attempts : ${attempts}";
       msgBgColor = Colors.red;
     }
