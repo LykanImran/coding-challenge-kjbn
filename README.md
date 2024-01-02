@@ -2,11 +2,11 @@
 
 A Flutter app to determine if the seconds count after a button is pressed matches a randomly generated number, and to display an appropriate message.
 
-## Getting Started
+## Getting Started ❤️
 
 Just press Click me continue pressing untill you get a success message
 
-### Screenshots
+### Screenshots 🎬
 
 ![Screenshot](screenshots/KJBN.jpg)
 
@@ -19,7 +19,7 @@ Just press Click me continue pressing untill you get a success message
 - **Created a centralised style sheets for easy changing of colors and fonts in the entire application**
 
 
-## Developer Details
+## Developer Details 💻
 
 **Name:** Md Imran Hussain
 
