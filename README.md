@@ -6,9 +6,15 @@ A Flutter app to determine if the seconds count after a button is pressed matche
 
 Just press Click me continue pressing untill you get a success message
 
-### Screenshots 🎬
+## Screenshots 🎬
 
 ![Screenshot](screenshots/KJBN.jpg)
+
+## Demo Video 🎬
+
+
+https://github.com/LykanImran/coding-challenge-kjbn/assets/38181200/e8901f67-4c87-4a73-939a-642e1b9214eb
+
 
 
 ### Project Details
